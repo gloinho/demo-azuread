@@ -16,7 +16,6 @@ export class LoginMiddleware implements NestMiddleware {
         successRedirect: '/',
       }),
     );
-
     if (
       !msalConfig.auth.cloudDiscoveryMetadata ||
       !msalConfig.auth.authorityMetadata
@@ -35,7 +34,7 @@ export class LoginMiddleware implements NestMiddleware {
     req.authCodeUrlRequestParams = {
       state: state,
       scopes: [],
-      redirectUri: 'http://localhost:3000/auth/redirect',
+      redirectUri: process.env.REDIRECT_URI,
     };
     const { verifier, challenge } =
       await this.cryptoProvider.generatePkceCodes();
@@ -43,7 +42,7 @@ export class LoginMiddleware implements NestMiddleware {
     req.authCodeRequestParams = {
       state: state,
       scopes: [],
-      redirectUri: 'http://localhost:3000/auth/redirect',
+      redirectUri: process.env.REDIRECT_URI,
     };
 
     req.session.pkceCodes = {

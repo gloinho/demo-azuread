@@ -1,13 +1,12 @@
 import { IMsalConfig } from '../interfaces/msal-config';
 import { LogLevel } from '@azure/msal-node';
+import 'dotenv/config';
 
 export const msalConfig: IMsalConfig = {
   auth: {
-    clientId: '848626ad-7931-4541-ad12-6bf0b7ba2bf4', // 'Application (client) ID' of app registration in Azure portal - this value is a GUID
-    authority:
-      'https://login.microsoftonline.com/' +
-      'b06f6a1f-d89f-49f1-80eb-a3a218759d65', // Full directory URL, in the form of https://login.microsoftonline.com/<tenant>
-    clientSecret: 'Meu8Q~UfaPwWZ3p6qhQ.3SA0iYIpHKFPKIhXpb7V', // Client secret generated from the app registration in Azure portal
+    clientId: process.env.CLIENT_ID, // 'Application (client) ID' of app registration in Azure portal - this value is a GUID
+    authority: process.env.AUTHORITY, // Full directory URL, in the form of https://login.microsoftonline.com/<tenant>
+    clientSecret: process.env.CLIENT_SECRET, // Client secret generated from the app registration in Azure portal
   },
   system: {
     loggerOptions: {
